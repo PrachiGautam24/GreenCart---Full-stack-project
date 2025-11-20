@@ -110,3 +110,6 @@ export const authorize = (...roles) => {
     next();
   };
 };
+
+// Alias for authorize (for compatibility)
+export const restrictTo = authorize;
