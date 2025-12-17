@@ -57,7 +57,7 @@ const getProducts = (sellerIds) => [
     title: 'Organic Cotton T-Shirt',
     description: 'Comfortable 100% organic cotton t-shirt, sustainably sourced and ethically produced.',
     price: 29.99,
-    images: ['https://res.cloudinary.com/demo/image/upload/sample.jpg'],
+    images: ['https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=800&q=80&auto=format&fit=crop'],
     sustainabilityTags: ['organic'],
     seller: sellerIds[0],
     category: 'Clothing',
@@ -68,7 +68,7 @@ const getProducts = (sellerIds) => [
     title: 'Handmade Ceramic Mug',
     description: 'Beautiful handcrafted ceramic mug, perfect for your morning coffee or tea.',
     price: 24.99,
-    images: ['https://res.cloudinary.com/demo/image/upload/sample.jpg'],
+    images: ['https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=800&q=80&auto=format&fit=crop'],
     sustainabilityTags: ['handmade'],
     seller: sellerIds[0],
     category: 'Home & Kitchen',
@@ -79,7 +79,7 @@ const getProducts = (sellerIds) => [
     title: 'Recycled Plastic Backpack',
     description: 'Durable backpack made from 100% recycled plastic bottles. Eco-friendly and stylish.',
     price: 49.99,
-    images: ['https://res.cloudinary.com/demo/image/upload/sample.jpg'],
+    images: ['https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=800&q=80&auto=format&fit=crop'],
     sustainabilityTags: ['recycled'],
     seller: sellerIds[0],
     category: 'Accessories',
@@ -90,7 +90,7 @@ const getProducts = (sellerIds) => [
     title: 'Organic Honey',
     description: 'Pure organic honey from local beekeepers. No additives or preservatives.',
     price: 15.99,
-    images: ['https://res.cloudinary.com/demo/image/upload/sample.jpg'],
+    images: ['https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=800&q=80&auto=format&fit=crop'],
     sustainabilityTags: ['organic'],
     seller: sellerIds[1],
     category: 'Food & Beverage',
@@ -101,7 +101,7 @@ const getProducts = (sellerIds) => [
     title: 'Handmade Wooden Cutting Board',
     description: 'Artisan-crafted cutting board from sustainable wood sources.',
     price: 39.99,
-    images: ['https://res.cloudinary.com/demo/image/upload/sample.jpg'],
+    images: ['https://images.unsplash.com/photo-1610701596007-11502861dcfa?w=800&q=80&auto=format&fit=crop'],
     sustainabilityTags: ['handmade'],
     seller: sellerIds[1],
     category: 'Home & Kitchen',
@@ -112,7 +112,7 @@ const getProducts = (sellerIds) => [
     title: 'Recycled Paper Notebook Set',
     description: 'Set of 3 notebooks made from 100% recycled paper. Perfect for journaling.',
     price: 18.99,
-    images: ['https://res.cloudinary.com/demo/image/upload/sample.jpg'],
+    images: ['https://images.unsplash.com/photo-1531346878377-a5be20888e57?w=800&q=80&auto=format&fit=crop'],
     sustainabilityTags: ['recycled'],
     seller: sellerIds[1],
     category: 'Stationery',
@@ -123,7 +123,7 @@ const getProducts = (sellerIds) => [
     title: 'Organic Bamboo Toothbrush',
     description: 'Biodegradable bamboo toothbrush with soft bristles. Eco-friendly dental care.',
     price: 8.99,
-    images: ['https://res.cloudinary.com/demo/image/upload/sample.jpg'],
+    images: ['https://images.unsplash.com/photo-1607613009820-a29f7bb81c04?w=800&q=80&auto=format&fit=crop'],
     sustainabilityTags: ['organic'],
     seller: sellerIds[0],
     category: 'Personal Care',
@@ -134,7 +134,7 @@ const getProducts = (sellerIds) => [
     title: 'Handmade Soy Candle',
     description: 'Hand-poured soy candle with natural essential oils. Burns clean and long.',
     price: 22.99,
-    images: ['https://res.cloudinary.com/demo/image/upload/sample.jpg'],
+    images: ['https://5.imimg.com/data5/SELLER/Default/2023/12/368986516/YS/WW/LZ/148092396/soy-wax-meditation-aromatherapy-candles-500x500.jpg'],
     sustainabilityTags: ['handmade', 'organic'],
     seller: sellerIds[1],
     category: 'Home & Decor',
@@ -228,9 +228,9 @@ const seedDatabase = async () => {
     await Review.deleteMany({});
     console.log('Existing data cleared');
 
-    // Create users
+    // Create users (using create() to trigger password hashing middleware)
     console.log('Creating users...');
-    const createdUsers = await User.insertMany(users);
+    const createdUsers = await User.create(users);
     console.log(`Created ${createdUsers.length} users`);
 
     // Get seller and buyer IDs

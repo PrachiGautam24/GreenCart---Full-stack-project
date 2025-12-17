@@ -368,3 +368,86 @@ export const updateProfile = async (req, res) => {
     });
   }
 };
+
+/**
+ * @desc    Upgrade user to seller
+ * @route   POST /api/auth/become-seller
+ * @access  Private
+ */
+export const becomeSeller = async (req, res) => {
+  try {
+    const {
+      businessName,
+      businessDescription,
+      businessAddress,
+      phoneNumber,
+      taxId,
+      bankAccountNumber,
+      bankName
+    } = req.body;
+
+    // Validate required fields
+    if (!businessName || !businessDescription || !businessAddress || !phoneNumber || !taxId || !bankAccountNumber || !bankName) {
+      return res.status(400).json({
+        success: false,
+        message: 'Please provide all required business information'
+      });
+    }
+
+    const user = await User.findById(req.user._id);
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: 'User not found'
+      });
+    }
+
+    // Check if user is already a seller
+    if (user.role === 'seller' || user.role === 'admin') {
+      return res.status(400).json({
+        success: false,
+        message: 'User already has seller access'
+      });
+    }
+
+    // Sanitize inputs
+    const sanitizedData = {
+      businessName: sanitizeString(businessName),
+      businessDescription: sanitizeString(businessDescription),
+      businessAddress: sanitizeString(businessAddress),
+      phoneNumber: sanitizeString(phoneNumber),
+      taxId: sanitizeString(taxId),
+      bankAccountNumber: sanitizeString(bankAccountNumber),
+      bankName: sanitizeString(bankName)
+    };
+
+    // Update user role and add seller information
+    user.role = 'seller';
+    user.sellerInfo = sanitizedData;
+
+    await user.save();
+
+    res.status(200).json({
+      success: true,
+      message: 'Successfully upgraded to seller account',
+      data: {
+        user: {
+          id: user._id,
+          username: user.username,
+          email: user.email,
+          role: user.role,
+          city: user.city,
+          profileImage: user.profileImage,
+          sellerInfo: user.sellerInfo
+        }
+      }
+    });
+  } catch (error) {
+    console.error('Become seller error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Error upgrading to seller account'
+    });
+  }
+};

@@ -46,6 +46,36 @@ const userSchema = new mongoose.Schema(
       type: Boolean,
       default: true
     },
+    sellerInfo: {
+      businessName: {
+        type: String,
+        trim: true
+      },
+      businessDescription: {
+        type: String,
+        trim: true
+      },
+      businessAddress: {
+        type: String,
+        trim: true
+      },
+      phoneNumber: {
+        type: String,
+        trim: true
+      },
+      taxId: {
+        type: String,
+        trim: true
+      },
+      bankAccountNumber: {
+        type: String,
+        trim: true
+      },
+      bankName: {
+        type: String,
+        trim: true
+      }
+    },
     cart: [
       {
         product: {

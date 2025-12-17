@@ -1,13 +1,24 @@
 {
-  "name": "new_project",
+  "name": "greencart-marketplace",
   "version": "1.0.0",
   "description": "A full-stack eco-commerce platform connecting local sellers offering sustainable products with environmentally conscious buyers.",
   "main": "index.js",
   "scripts": {
+    "install:backend": "cd backend && npm install",
+    "install:frontend": "cd frontend && npm install",
+    "install:all": "npm run install:backend && npm run install:frontend",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev": "echo Run 'npm run dev:backend' and 'npm run dev:frontend' in separate terminals",
+    "start:backend": "cd backend && npm start",
+    "start:frontend": "cd frontend && npm run preview",
+    "start": "npm run start:backend",
+    "build:frontend": "cd frontend && npm run build",
+    "seed": "cd backend && npm run seed",
+    "clear-db": "cd backend && npm run clear-db",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "keywords": ["ecommerce", "marketplace", "sustainable", "eco-friendly"],
   "author": "",
-  "license": "ISC",
-  "type": "commonjs"
+  "license": "ISC"
 }

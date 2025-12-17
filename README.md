@@ -1,243 +1,154 @@
-# GreenCart Marketplace
+# GreenCart - Sustainable Marketplace
 
-A full-stack eco-commerce platform connecting local sellers offering sustainable products with environmentally conscious buyers.
+A modern e-commerce platform connecting eco-conscious consumers with local sellers offering sustainable, organic, and handmade products.
 
-## Project Structure
+## 🌱 About
+
+GreenCart is a marketplace dedicated to promoting sustainable commerce. We connect environmentally conscious buyers with local sellers who offer eco-friendly products including organic goods, handmade items, and recycled materials.
+
+## ✨ Features
+
+- **User Authentication** - Secure registration and login system
+- **Multi-Role Platform** - Support for buyers, sellers, and administrators
+- **Product Catalog** - Browse and search sustainable products
+- **Shopping Cart** - Seamless cart and checkout experience
+- **Seller Dashboard** - Comprehensive tools for managing products and orders
+- **Review System** - Customer reviews and ratings
+- **Responsive Design** - Optimized for desktop and mobile devices
+
+## 🚀 Quick Start
+
+### Prerequisites
+
+- Node.js 16+ 
+- MongoDB (local installation or MongoDB Atlas)
+- npm or yarn package manager
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/yourusername/greencart-marketplace.git
+   cd greencart-marketplace
+   ```
+
+2. **Backend Setup**
+   ```bash
+   cd backend
+   npm install
+   
+   # Create .env file with your configuration
+   cp .env.example .env
+   
+   # Start the backend server
+   npm start
+   ```
+
+3. **Frontend Setup**
+   ```bash
+   cd frontend
+   npm install
+   
+   # Start the development server
+   npm run dev
+   ```
+
+4. **Access the Application**
+   - Frontend: http://localhost:8080
+   - Backend API: http://localhost:5000
+
+### Environment Variables
+
+Create a `.env` file in the backend directory:
+
+```env
+NODE_ENV=development
+PORT=5000
+MONGODB_URI=mongodb://localhost:27017/greencart
+JWT_SECRET=your-secret-key-here
+JWT_EXPIRE=24h
+CLOUDINARY_CLOUD_NAME=your-cloudinary-name
+CLOUDINARY_API_KEY=your-api-key
+CLOUDINARY_API_SECRET=your-api-secret
+```
+
+## 🏗️ Project Structure
 
 ```
 greencart-marketplace/
-├── backend/              # Express.js REST API
-│   ├── config/          # Database and service configurations
-│   ├── controllers/     # Request handlers
-│   ├── middleware/      # Authentication, validation, error handling
-│   ├── models/          # Mongoose schemas
-│   ├── routes/          # API route definitions
-│   ├── utils/           # Helper functions
-│   ├── .env.example     # Environment variables template
-│   ├── .gitignore
-│   ├── package.json
-│   └── server.js        # Application entry point
-│
-└── frontend/            # React SPA with Vite
-    ├── src/
-    │   ├── components/  # Reusable React components
-    │   ├── pages/       # Page components
-    │   ├── store/       # Redux store and slices
-    │   ├── services/    # API service functions
-    │   ├── utils/       # Helper functions
-    │   ├── App.jsx
-    │   ├── main.jsx
-    │   └── index.css    # Tailwind CSS
-    ├── .env.example     # Environment variables template
-    ├── .gitignore
-    ├── package.json
-    ├── tailwind.config.js
-    └── vite.config.js
+├── backend/                 # Node.js/Express API
+│   ├── controllers/        # Route controllers
+│   ├── models/            # MongoDB models
+│   ├── routes/            # API routes
+│   ├── middleware/        # Custom middleware
+│   ├── utils/             # Utility functions
+│   └── server.js          # Entry point
+├── frontend/               # React application
+│   ├── src/
+│   │   ├── components/    # Reusable components
+│   │   ├── pages/         # Page components
+│   │   ├── services/      # API services
+│   │   ├── store/         # Redux store
+│   │   └── utils/         # Utility functions
+│   └── public/            # Static assets
+└── README.md
 ```
 
-## Tech Stack
+## 🛠️ Technology Stack
 
-### Backend
-- Node.js & Express.js
-- MongoDB with Mongoose
-- JWT Authentication
-- Cloudinary (Image Storage)
-- bcrypt (Password Hashing)
+**Frontend:**
+- React 18 with TypeScript
+- Redux Toolkit for state management
+- React Router for navigation
+- Tailwind CSS for styling
+- Shadcn/ui component library
 
-### Frontend
-- React 18+
-- Redux Toolkit (State Management)
-- React Router (Navigation)
-- Tailwind CSS (Styling)
-- Axios (API Client)
+**Backend:**
+- Node.js with Express.js
+- MongoDB with Mongoose ODM
+- JWT for authentication
+- Cloudinary for image storage
+- Security middleware (Helmet, CORS, rate limiting)
 
-## Getting Started
+## 📱 Usage
 
-### Prerequisites
-- Node.js (v18 or higher)
-- MongoDB (local or Atlas)
-- Cloudinary account
+### For Buyers
+1. Register or login to your account
+2. Browse products by category or search
+3. Add items to your cart
+4. Complete secure checkout
+5. Leave reviews for purchased products
 
-### Backend Setup
+### For Sellers
+1. Register as a buyer first
+2. Upgrade to seller account with business information
+3. Access seller dashboard
+4. Add and manage your products
+5. Track orders and customer reviews
 
-1. Navigate to backend directory:
-```bash
-cd backend
-```
+## 🔒 Security Features
 
-2. Copy environment variables:
-```bash
-copy .env.example .env
-```
+- JWT-based authentication
+- Input validation and sanitization
+- Rate limiting on API endpoints
+- Secure HTTP headers with Helmet
+- CORS protection
+- Password hashing with bcrypt
 
-3. Update `.env` with your credentials
+## 🤝 Contributing
 
-4. Install dependencies:
-```bash
-npm install
-```
+We welcome contributions! Please feel free to submit a Pull Request.
 
-5. Start the server:
-```bash
-npm run dev
-```
+1. Fork the project
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-The API will run on `http://localhost:5000`
+## 📄 License
 
-### Database Setup & Test Data
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-To populate the database with test data:
+## 📞 Support
 
-```bash
-cd backend
-npm run seed
-```
-
-This creates test accounts for all roles:
-- **Admin:** admin@greencart.com / admin123
-- **Sellers:** seller1@greencart.com, seller2@greencart.com / seller123
-- **Buyers:** buyer1@greencart.com, buyer2@greencart.com / buyer123
-
-To clear the database:
-
-```bash
-npm run clear-db
-```
-
-For complete test user documentation, see `backend/scripts/TEST_USERS.md`
-
-### Frontend Setup
-
-1. Navigate to frontend directory:
-```bash
-cd frontend
-```
-
-2. Copy environment variables:
-```bash
-copy .env.example .env
-```
-
-3. Update `.env` with your API URL
-
-4. Install dependencies:
-```bash
-npm install
-```
-
-5. Start the development server:
-```bash
-npm run dev
-```
-
-The app will run on `http://localhost:5173`
-
-## Environment Variables
-
-### Backend (.env)
-- `PORT` - Server port (default: 5000)
-- `NODE_ENV` - Environment (development/production)
-- `MONGODB_URI` - MongoDB connection string
-- `JWT_SECRET` - Secret key for JWT tokens
-- `JWT_EXPIRE` - Token expiration time
-- `CLOUDINARY_CLOUD_NAME` - Cloudinary cloud name
-- `CLOUDINARY_API_KEY` - Cloudinary API key
-- `CLOUDINARY_API_SECRET` - Cloudinary API secret
-- `FRONTEND_URL` - Frontend URL for CORS
-
-### Frontend (.env)
-- `VITE_API_URL` - Backend API URL
-
-## Available Scripts
-
-### Backend Scripts
-
-- `npm start` - Start production server
-- `npm run dev` - Start development server with auto-reload
-- `npm run seed` - Populate database with test data
-- `npm run clear-db` - Clear all data from database
-
-### Frontend Scripts
-
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run preview` - Preview production build
-
-## Features
-
-- User authentication with role-based access (Admin, Seller, Buyer)
-- Product listing management with image uploads
-- Search and filter by sustainability tags
-- Shopping cart and checkout
-- Seller profiles with ratings
-- Community feedback and reviews
-- Admin dashboard for user and content management
-
-## Security Features
-
-GreenCart implements comprehensive security measures:
-
-- **Rate Limiting**: Protection against brute force attacks (5 auth attempts per 15 min)
-- **Input Sanitization**: XSS prevention with HTML/script removal
-- **NoSQL Injection Prevention**: Query sanitization for MongoDB
-- **Secure Headers**: Helmet.js with Content Security Policy
-- **File Upload Validation**: Type, size, and MIME verification (5MB limit)
-- **JWT Authentication**: Secure token-based authentication with expiration
-- **Password Security**: bcrypt hashing with salt rounds
-- **Security Logging**: Authentication attempts, admin actions, and file uploads
-
-For detailed security documentation, see `backend/SECURITY.md`
-
-### Installing Security Dependencies
-
-```bash
-cd backend
-npm install express-rate-limit helmet express-mongo-sanitize xss-clean
-```
-
-## Testing
-
-Before deployment, thoroughly test all user flows. See the comprehensive testing guide:
-
-📋 **[TESTING_GUIDE.md](TESTING_GUIDE.md)** - Step-by-step testing instructions for all features
-
-✅ **[INTEGRATION_TEST_CHECKLIST.md](INTEGRATION_TEST_CHECKLIST.md)** - Quick integration test checklist
-
-## Deployment
-
-Ready to deploy to production? Start here:
-
-📦 **[DEPLOYMENT_SUMMARY.md](DEPLOYMENT_SUMMARY.md)** - Complete deployment overview and status
-
-🚀 **[DEPLOYMENT.md](DEPLOYMENT.md)** - Detailed deployment guide with platform-specific instructions
-
-📝 **[PRODUCTION_ENV.md](PRODUCTION_ENV.md)** - Production environment variables setup and security
-
-☑️ **[PRE_DEPLOYMENT_CHECKLIST.md](PRE_DEPLOYMENT_CHECKLIST.md)** - Final verification before deployment
-
-🔧 **[frontend/BUILD_VERIFICATION.md](frontend/BUILD_VERIFICATION.md)** - Frontend build verification guide
-
-### Quick Deployment Steps
-
-1. Review [DEPLOYMENT_SUMMARY.md](DEPLOYMENT_SUMMARY.md) for project status
-2. Complete [PRE_DEPLOYMENT_CHECKLIST.md](PRE_DEPLOYMENT_CHECKLIST.md)
-3. Run [INTEGRATION_TEST_CHECKLIST.md](INTEGRATION_TEST_CHECKLIST.md)
-4. Set up production environment variables (see [PRODUCTION_ENV.md](PRODUCTION_ENV.md))
-5. Follow deployment instructions for your chosen platform (see [DEPLOYMENT.md](DEPLOYMENT.md))
-6. Verify deployment with post-deployment checklist
-
-### Recommended Hosting
-
-- **Backend:** Railway (recommended), Render, or Heroku
-- **Frontend:** Vercel (recommended), Netlify, or Cloudflare Pages
-- **Database:** MongoDB Atlas
-- **Images:** Cloudinary
-
-### Estimated Costs
-
-- **Free Tier:** $0-5/month (suitable for MVP/testing)
-- **Production:** $20-30/month (low traffic)
-
-## License
-
-ISC
+For support, email support@greencart.com or create an issue in this repository.

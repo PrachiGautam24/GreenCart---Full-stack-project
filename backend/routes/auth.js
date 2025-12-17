@@ -3,7 +3,8 @@ import {
   register,
   login,
   getProfile,
-  updateProfile
+  updateProfile,
+  becomeSeller
 } from '../controllers/authController.js';
 import { protect } from '../middleware/auth.js';
 import { authLimiter } from '../middleware/rateLimiter.js';
@@ -18,5 +19,6 @@ router.post('/login', authLimiter, logAuthAttempt, login);
 // Protected routes
 router.get('/me', protect, getProfile);
 router.put('/profile', protect, updateProfile);
+router.post('/become-seller', protect, becomeSeller);
 
 export default router;
