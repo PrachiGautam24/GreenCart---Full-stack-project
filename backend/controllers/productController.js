@@ -92,7 +92,7 @@ const createProduct = async (req, res) => {
  */
 const getProducts = async (req, res) => {
   try {
-    const { search, tags, city, page = 1, limit = 20 } = req.query;
+    const { search, tags, city, category, page = 1, limit = 20 } = req.query;
 
     // Build query
     let query = { isActive: true };
@@ -109,6 +109,11 @@ const getProducts = async (req, res) => {
     if (tags) {
       const tagArray = Array.isArray(tags) ? tags : tags.split(',');
       query.sustainabilityTags = { $in: tagArray };
+    }
+
+    // Filter by category (case-insensitive, partial match)
+    if (category) {
+      query.category = { $regex: category, $options: 'i' };
     }
 
     // Filter by seller's city
