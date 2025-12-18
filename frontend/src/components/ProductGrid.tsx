@@ -11,13 +11,32 @@ interface ProductGridProps {
 const ProductGrid = ({ selectedCategory, searchQuery }: ProductGridProps) => {
   const { data, isLoading, error } = useQuery({
     queryKey: ['products', selectedCategory, searchQuery],
-    queryFn: () => productService.getProducts({
-      search: searchQuery || undefined,
-      category: selectedCategory !== 'all' ? selectedCategory : undefined,
-    }),
+    queryFn: () => {
+      // Some filter buttons represent sustainability tags (organic/handmade/recycled)
+      // while others represent product categories (clothing/home...).
+      // Map UI category ids to API params accordingly.
+      const tagFilters = ['organic', 'handmade', 'recycled'];
+      const categoryMap: Record<string, string> = {
+        clothing: 'Clothing',
+        home: 'Home & Kitchen'
+      };
+
+      const params: any = {};
+      if (searchQuery) params.search = searchQuery;
+
+      if (selectedCategory && selectedCategory !== 'all') {
+        if (tagFilters.includes(selectedCategory)) {
+          params.tags = [selectedCategory];
+        } else {
+          params.category = categoryMap[selectedCategory] || selectedCategory;
+        }
+      }
+
+      return productService.getProducts(params);
+    },
   });
 
-  const products = data?.data?.products || [];
+  const products = Array.isArray(data?.data?.products) ? data!.data!.products : [];
 
   if (isLoading) {
     return (
