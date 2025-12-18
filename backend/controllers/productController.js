@@ -141,12 +141,13 @@ const getProducts = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      data: products,
-      pagination: {
-        page: pageNum,
-        limit: limitNum,
-        total,
-        pages: Math.ceil(total / limitNum)
+      data: {
+        products,
+        pagination: {
+          total,
+          page: pageNum,
+          pages: Math.ceil(total / limitNum)
+        }
       }
     });
   } catch (error) {

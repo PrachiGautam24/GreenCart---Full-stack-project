@@ -1,6 +1,6 @@
 import express from 'express';
 import { checkout, getOrders, getOrderById } from '../controllers/orderController.js';
-import { protect, restrictTo } from '../middleware/auth.js';
+import { protect, authorize } from '../middleware/auth.js';
 
 const router = express.Router();
 
@@ -8,7 +8,7 @@ const router = express.Router();
 router.use(protect);
 
 // Checkout - create order from cart (buyer only)
-router.post('/checkout', restrictTo('buyer'), checkout);
+router.post('/checkout', authorize('buyer'), checkout);
 
 // Get user's order history
 router.get('/', getOrders);

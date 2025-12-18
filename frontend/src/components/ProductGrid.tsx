@@ -17,7 +17,7 @@ const ProductGrid = ({ selectedCategory, searchQuery }: ProductGridProps) => {
     }),
   });
 
-  const products = Array.isArray(data?.data) ? data.data : (data?.data?.products || []);
+  const products = data?.data?.products || [];
 
   if (isLoading) {
     return (
