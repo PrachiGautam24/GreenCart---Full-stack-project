@@ -93,6 +93,9 @@ const createProduct = async (req, res) => {
 const getProducts = async (req, res) => {
   try {
     const { search, tags, city, category, page = 1, limit = 20 } = req.query;
+    // Debugging: log incoming tags param shape
+    // (will be removed after diagnosing filter behavior)
+    console.log('getProducts - tags param type:', typeof tags, 'value:', tags);
 
     // Build query
     let query = { isActive: true };
@@ -105,10 +108,41 @@ const getProducts = async (req, res) => {
       ];
     }
 
-    // Filter by sustainability tags
+    // Filter by sustainability tags (robust parsing)
     if (tags) {
-      const tagArray = Array.isArray(tags) ? tags : tags.split(',');
-      query.sustainabilityTags = { $in: tagArray };
+      const parseTags = (raw) => {
+        if (!raw) return [];
+        if (Array.isArray(raw)) {
+          return raw
+            .flatMap((r) => (typeof r === 'string' ? r.split(/[\s,]+/) : []))
+            .map((t) => t.trim())
+            .filter(Boolean);
+        }
+        if (typeof raw === 'string') {
+          // Accept comma separated, space separated or JSON array string
+          try {
+            const maybe = JSON.parse(raw);
+            if (Array.isArray(maybe)) return maybe.map((t) => String(t).trim()).filter(Boolean);
+          } catch (e) {
+            // not JSON
+          }
+          return raw.split(/[\s,]+/).map((t) => t.trim()).filter(Boolean);
+        }
+        // Fallback
+        return [];
+      };
+
+      const tagArray = parseTags(tags);
+      if (tagArray.length > 0) {
+        // Build regex array for case-insensitive exact match
+        const regexArray = tagArray.map((t) => new RegExp(`^${t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}$`, 'i'));
+
+        // Support both array-of-tags and space-separated string in DB by matching either
+        query.$or = [
+          { sustainabilityTags: { $in: regexArray } },
+          { sustainabilityTags: { $regex: tagArray.join('|'), $options: 'i' } },
+        ];
+      }
     }
 
     // Filter by category (case-insensitive, partial match)
