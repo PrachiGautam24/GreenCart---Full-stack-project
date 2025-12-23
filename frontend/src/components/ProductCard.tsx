@@ -126,7 +126,7 @@ const ProductCard = ({ id, name, price, image, seller, location, rating, tags }:
 
         <div className="flex items-center justify-between">
           <div>
-            <span className="text-2xl font-bold text-primary">${price.toFixed(2)}</span>
+            <span className="text-2xl font-bold text-primary">Rs. {price.toFixed(2)}</span>
           </div>
         </div>
       </CardContent>

@@ -38,8 +38,9 @@ const SellerDashboard = () => {
   }
 
   const { data: productsData, isLoading } = useQuery({
-    queryKey: ['seller-products'],
-    queryFn: () => productService.getProducts({}),
+    queryKey: ['seller-products', user?.id],
+    queryFn: () => productService.getProductsBySeller(user?.id || ''),
+    enabled: !!user?.id,
   });
 
   const createProductMutation = useMutation({
@@ -101,9 +102,10 @@ const SellerDashboard = () => {
     }));
   };
 
-  // Normalize productsData to an array of Product so components can consume it
-  const products: Product[] = (Array.isArray(productsData) ? productsData : (productsData as any)?.products) || [];
-  const myProducts = products.filter((p: Product) => p.seller._id === user?._id);
+  // Normalize productsData to an array of Product
+  const myProducts: Product[] = Array.isArray(productsData?.data?.products) 
+    ? productsData.data.products 
+    : [];
 
   return (
     <div className="min-h-screen bg-background">
@@ -152,7 +154,7 @@ const SellerDashboard = () => {
 
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label htmlFor="price">Price ($) *</Label>
+                    <Label htmlFor="price">Price (Rs.) *</Label>
                     <Input
                       id="price"
                       type="number"
@@ -232,7 +234,7 @@ const SellerDashboard = () => {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">
-                ${myProducts.reduce((sum: number, p: Product) => sum + (p.price * (50 - p.stock)), 0).toFixed(2)}
+                Rs. {myProducts.reduce((sum: number, p: Product) => sum + (p.price * (50 - p.stock)), 0).toFixed(2)}
               </div>
             </CardContent>
           </Card>
@@ -289,7 +291,7 @@ const SellerDashboard = () => {
                         {product.description}
                       </p>
                       <div className="flex items-center gap-4 text-sm">
-                        <span className="font-semibold text-primary">${product.price}</span>
+                        <span className="font-semibold text-primary">Rs. {product.price}</span>
                         <span className="text-muted-foreground">Stock: {product.stock}</span>
                         <div className="flex items-center gap-1">
                           <Star className="w-4 h-4 fill-accent text-accent" />

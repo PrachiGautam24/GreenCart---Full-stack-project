@@ -49,6 +49,11 @@ export const productService = {
     return response.data;
   },
 
+  async getProductsBySeller(sellerId: string): Promise<ProductsResponse> {
+    const response = await api.get(`/products/seller/${sellerId}`);
+    return response.data;
+  },
+
   async createProduct(formData: FormData): Promise<{ success: boolean; data: Product }> {
     const response = await api.post('/products', formData, {
       headers: {

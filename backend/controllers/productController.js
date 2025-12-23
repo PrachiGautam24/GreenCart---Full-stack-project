@@ -381,8 +381,9 @@ const getProductsBySeller = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      data: products,
-      count: products.length
+      data: {
+        products: products
+      }
     });
   } catch (error) {
     res.status(500).json({

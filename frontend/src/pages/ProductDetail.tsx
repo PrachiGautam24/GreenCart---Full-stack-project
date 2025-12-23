@@ -143,7 +143,7 @@ const ProductDetail = () => {
             </div>
 
             <div className="text-4xl font-bold text-primary mb-6">
-              ${product.price.toFixed(2)}
+              Rs. {product.price.toFixed(2)}
             </div>
 
             <div className="prose prose-sm mb-6">

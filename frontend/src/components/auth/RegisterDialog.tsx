@@ -127,7 +127,7 @@ const RegisterDialog = ({ open, onOpenChange, onSwitchToLogin }: RegisterDialogP
           <ValidatedInput
             id="city"
             label="City"
-            placeholder="New York"
+            placeholder="Delhi"
             value={formData.city}
             onChange={(value) => setFormData({ ...formData, city: value })}
             onValidation={(result) => handleValidation('city', result)}

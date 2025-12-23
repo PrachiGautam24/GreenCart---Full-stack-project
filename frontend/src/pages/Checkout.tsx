@@ -40,6 +40,44 @@ const Checkout = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validate all required fields
+    if (!formData.shippingAddress.trim()) {
+      toast({
+        title: "Incomplete Form",
+        description: "Please enter your street address",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (!formData.city.trim()) {
+      toast({
+        title: "Incomplete Form",
+        description: "Please enter your city",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (!formData.postalCode.trim()) {
+      toast({
+        title: "Incomplete Form",
+        description: "Please enter your postal code (pin code)",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (!formData.phone.trim()) {
+      toast({
+        title: "Incomplete Form",
+        description: "Please enter your phone number",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setLoading(true);
 
     try {
@@ -128,17 +166,17 @@ const Checkout = () => {
                       <Label htmlFor="city">City *</Label>
                       <Input
                         id="city"
-                        placeholder="New York"
+                        placeholder="e.g., Faridabad, Chandigarh, Delhi"
                         value={formData.city}
                         onChange={(e) => setFormData({ ...formData, city: e.target.value })}
                         required
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="postal">Postal Code *</Label>
+                      <Label htmlFor="postal">Pin Code *</Label>
                       <Input
                         id="postal"
-                        placeholder="10001"
+                        placeholder="e.g., 400001"
                         value={formData.postalCode}
                         onChange={(e) => setFormData({ ...formData, postalCode: e.target.value })}
                         required
@@ -151,7 +189,7 @@ const Checkout = () => {
                     <Input
                       id="phone"
                       type="tel"
-                      placeholder="+1 (555) 123-4567"
+                      placeholder="e.g., +91 98765 43210"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                       required
@@ -211,10 +249,10 @@ const Checkout = () => {
                       <div className="flex-1 min-w-0">
                         <p className="text-sm font-medium truncate">{item.name}</p>
                         <p className="text-sm text-muted-foreground">
-                          Qty: {item.quantity} × ${item.price.toFixed(2)}
+                          Qty: {item.quantity} × Rs. {item.price.toFixed(2)}
                         </p>
                         <p className="text-sm font-semibold text-primary">
-                          ${(item.price * item.quantity).toFixed(2)}
+                          Rs. {(item.price * item.quantity).toFixed(2)}
                         </p>
                       </div>
                     </div>
@@ -226,7 +264,7 @@ const Checkout = () => {
                 <div className="space-y-2">
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">Subtotal</span>
-                    <span className="font-medium">${totalPrice.toFixed(2)}</span>
+                    <span className="font-medium">Rs. {totalPrice.toFixed(2)}</span>
                   </div>
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">Shipping</span>
@@ -235,7 +273,7 @@ const Checkout = () => {
                   <Separator />
                   <div className="flex justify-between text-lg font-bold">
                     <span>Total</span>
-                    <span className="text-primary">${totalPrice.toFixed(2)}</span>
+                    <span className="text-primary">Rs. {totalPrice.toFixed(2)}</span>
                   </div>
                 </div>
 

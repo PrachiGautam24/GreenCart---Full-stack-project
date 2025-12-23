@@ -26,7 +26,7 @@ const ProductGrid = ({ selectedCategory, searchQuery }: ProductGridProps) => {
 
       if (selectedCategory && selectedCategory !== 'all') {
         if (tagFilters.includes(selectedCategory)) {
-          params.tags = [selectedCategory];
+          params.tags = selectedCategory;
         } else {
           params.category = categoryMap[selectedCategory] || selectedCategory;
         }

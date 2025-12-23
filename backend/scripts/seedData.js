@@ -22,7 +22,7 @@ const users = [
     email: 'seller1@greencart.com',
     password: 'seller123',
     role: 'seller',
-    city: 'San Francisco',
+    city: 'Faridabad',
     profileImage: 'https://res.cloudinary.com/demo/image/upload/sample.jpg'
   },
   {
@@ -30,7 +30,7 @@ const users = [
     email: 'seller2@greencart.com',
     password: 'seller123',
     role: 'seller',
-    city: 'Los Angeles',
+    city: 'Chandigarh',
     profileImage: 'https://res.cloudinary.com/demo/image/upload/sample.jpg'
   },
   {
@@ -38,7 +38,7 @@ const users = [
     email: 'buyer1@greencart.com',
     password: 'buyer123',
     role: 'buyer',
-    city: 'San Francisco',
+    city: 'Faridabad',
     profileImage: 'https://res.cloudinary.com/demo/image/upload/sample.jpg'
   },
   {
@@ -46,7 +46,7 @@ const users = [
     email: 'buyer2@greencart.com',
     password: 'buyer123',
     role: 'buyer',
-    city: 'Los Angeles',
+    city: 'Chandigarh',
     profileImage: 'https://res.cloudinary.com/demo/image/upload/sample.jpg'
   }
 ];
