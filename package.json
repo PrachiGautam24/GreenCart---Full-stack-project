@@ -14,6 +14,7 @@
     "start:frontend": "cd frontend && npm run preview",
     "start": "npm run start:backend",
     "build:frontend": "cd frontend && npm run build",
+    "build:gh-pages": "cd frontend && npm run build && cp -r dist/* ../docs/",
     "seed": "cd backend && npm run seed",
     "clear-db": "cd backend && npm run clear-db",
     "test": "echo \"Error: no test specified\" && exit 1"

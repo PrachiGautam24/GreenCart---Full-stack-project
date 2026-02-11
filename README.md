@@ -57,6 +57,33 @@ GreenCart is a marketplace dedicated to promoting sustainable commerce. We conne
    - Frontend: http://localhost:8080
    - Backend API: http://localhost:5000
 
+## 🌐 Deployment
+
+### GitHub Pages Deployment
+
+This project is configured for automatic deployment to GitHub Pages:
+
+1. **Enable GitHub Pages**:
+   - Go to your repository settings
+   - Navigate to "Pages" section
+   - Set source to "GitHub Actions"
+
+2. **Automatic Deployment**:
+   - Push to main branch triggers automatic build and deployment
+   - The GitHub Action will build the frontend and deploy to GitHub Pages
+
+3. **Manual Deployment**:
+   ```bash
+   # Build the frontend for production
+   npm run build:frontend
+   
+   # The built files will be in frontend/dist/
+   ```
+
+4. **Custom Domain** (Optional):
+   - Add a `CNAME` file in `frontend/public/` with your domain
+   - Configure DNS settings with your domain provider
+
 ### Environment Variables
 
 Create a `.env` file in the backend directory:
